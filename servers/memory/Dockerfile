@@ -36,6 +36,7 @@ RUN adduser \
 # into this layer.
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && pip install --no-cache-dir \
+        fastapi==0.68.0 \
         uvicorn[standard]==0.27.0 \
         pydantic==2.6.4 \
         python-multipart==0.0.9 \
