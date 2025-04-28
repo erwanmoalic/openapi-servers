@@ -34,7 +34,13 @@ RUN adduser \
 # Leverage a cache mount to /root/.cache/pip to speed up subsequent builds.
 # Leverage a bind mount to requirements.txt to avoid having to copy them into
 # into this layer.
-RUN python -m pip install -r requirements.txt
+RUN apt-get update && apt-get install -y --no-install-recommends curl \
+    && pip install --no-cache-dir \
+        uvicorn[standard]==0.27.0 \
+        pydantic==2.6.4 \
+        python-multipart==0.0.9 \
+        pytz==2024.1 \
+        python-dateutil==2.9.0.post0 \
 
 # Change the ownership of /app/data directory and its contents to appuser
 RUN mkdir -p /app/data && touch /app/data/memory.json && chown -R ${UID}:${UID} /app/data
