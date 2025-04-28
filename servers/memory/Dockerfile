@@ -36,12 +36,12 @@ RUN adduser \
 # into this layer.
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && pip install --no-cache-dir \
-        fastapi==0.68.0 \
-        uvicorn[standard]==0.27.0 \
-        pydantic==2.6.4 \
-        python-multipart==0.0.9 \
-        pytz==2024.1 \
-        python-dateutil==2.9.0.post0
+        fastapi \
+        uvicorn[standard] \
+        pydantic \
+        python-multipart \
+        pytz \
+        python-dateutil
 
 # Change the ownership of /app/data directory and its contents to appuser
 RUN mkdir -p /app/data && touch /app/data/memory.json && chown -R ${UID}:${UID} /app/data
